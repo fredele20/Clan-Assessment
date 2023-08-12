@@ -7,13 +7,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-type testData struct {
+type flightTestData struct {
 	Filter       *models.FilterFlight
 	FlightOutput models.ListFlight
 }
 
 func TestGetFlights(t *testing.T) {
-	tests := []testData{
+	tests := []flightTestData{
 		{Filter: &models.FilterFlight{Departure: "lagos", Destination: "abuja"}},
 		{Filter: &models.FilterFlight{Departure: "ajah", Destination: "abuja"}},
 		{Filter: &models.FilterFlight{Departure: "ilorin", Destination: "sokoto"}},

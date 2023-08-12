@@ -5,6 +5,7 @@ import (
 	"clan-africa/models"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -60,6 +61,30 @@ func BookFlight() gin.HandlerFunc {
 			return
 		}
 
+		location := url.URL{Path: "https://google.com"}
+
+		ctx.Redirect(http.StatusTemporaryRedirect, location.RequestURI())
 		ctx.JSON(http.StatusCreated, bookFlight)
+	}
+}
+
+func ConfirmBookingPayment() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var payment models.MockPayment
+		if err := ctx.BindJSON(&payment); err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		bookingId := ctx.Param("id")
+		bookingIdInt, _ := strconv.Atoi(bookingId)
+
+		confirmPayment, err := db.ConfirmBooking(bookingIdInt, &payment)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		ctx.JSON(http.StatusCreated, confirmPayment)
 	}
 }

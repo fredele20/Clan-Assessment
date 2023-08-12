@@ -2,6 +2,7 @@
 {
 "id": 1,
 "flightId": 1,
-"type": "firstClass"
+"option": "regular",
+"price": 10000
 }
 ]

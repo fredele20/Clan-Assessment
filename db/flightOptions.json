@@ -1,11 +1,14 @@
 [
 {
-"option": "First Class"
+"option": "First Class",
+"price": 30000
 },
 {
-"option": "Middle Class"
+"option": "Middle Class",
+"price": 20000
 },
 {
-"option": "Regular"
+"option": "Regular",
+"price": 10000
 }
 ]

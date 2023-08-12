@@ -4,7 +4,6 @@ import (
 	"clan-africa/models"
 	_ "embed"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -58,9 +57,9 @@ func PopulateFlight() {
 
 func PopulateFlightOptions() {
 	options := []models.FlightOptions{
-		{ Option: "First Class" },
-		{ Option: "Middle Class" },
-		{ Option: "Regular" },
+		{ Option: "First Class", Price: 30000 },
+		{ Option: "Middle Class", Price: 20000 },
+		{ Option: "Regular", Price: 10000 },
 	}
 	data, _ := json.MarshalIndent(options, "", "")
 	_ = ioutil.WriteFile("db/flightOptions.json", data, 0644)
@@ -74,7 +73,6 @@ func GetFlights(filter *models.FilterFlight) (*models.ListFlight, error) {
 		log.Fatalf("Error unmarshalling JSON: %v", err)
 	}
 
-	fmt.Println("filters: ", filter)
 	if filter.Departure == "" && filter.Destination == "" {
 		return &models.ListFlight{
 			Data:  flights,

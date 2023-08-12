@@ -22,4 +22,5 @@ type ListFlight struct {
 
 type FlightOptions struct {
 	Option string `json:"option"`
+	Price  int    `json:"price"`
 }
